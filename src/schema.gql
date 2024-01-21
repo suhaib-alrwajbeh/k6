@@ -1,0 +1,101 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Mutation {
+  createPost(postCreateInput: PostCreateInput!): Post!
+  createUser(userCreateInput: UserCreateInput!): User!
+}
+
+type Post {
+  id: Int!
+  status: Status!
+  title: String!
+  userId: Int
+}
+
+input PostCreateInput {
+  status: Status
+  title: String!
+  user: UserCreateNestedOneWithoutPostsInput
+}
+
+input PostCreateManyUserInput {
+  id: Int
+  status: Status
+  title: String!
+}
+
+input PostCreateManyUserInputEnvelope {
+  data: [PostCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input PostCreateNestedManyWithoutUserInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutUserInput!]
+  create: [PostCreateWithoutUserInput!]
+  createMany: PostCreateManyUserInputEnvelope
+}
+
+input PostCreateOrConnectWithoutUserInput {
+  create: PostCreateWithoutUserInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateWithoutUserInput {
+  status: Status
+  title: String!
+}
+
+input PostWhereUniqueInput {
+  id: Int
+}
+
+type Query {
+  getAllActivePostsByUserId(userId: Int!): [Post!]!
+  getUser(id: Int!): User!
+}
+
+enum Status {
+  PENDING
+  PUBLISHED
+}
+
+type User {
+  _count: UserCount
+  email: String!
+  id: Int!
+  name: String!
+}
+
+type UserCount {
+  posts: Int!
+}
+
+input UserCreateInput {
+  email: String!
+  name: String!
+  posts: PostCreateNestedManyWithoutUserInput
+}
+
+input UserCreateNestedOneWithoutPostsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutPostsInput
+  create: UserCreateWithoutPostsInput
+}
+
+input UserCreateOrConnectWithoutPostsInput {
+  create: UserCreateWithoutPostsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateWithoutPostsInput {
+  email: String!
+  name: String!
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: Int
+}
